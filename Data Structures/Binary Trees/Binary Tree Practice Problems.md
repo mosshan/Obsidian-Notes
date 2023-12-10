@@ -164,3 +164,165 @@ Plan1
 Plan 2
 - space: O(h)
 - runtime: O(n)
+
+## Balanced Binary Tree
+https://leetcode.com/problems/balanced-binary-tree/
+determine if a tree is height balanced
+- depth of the two subtrees of every node never differs by more than one.
+- find height of left and right subtree 
+	- if balanced
+	- traverse left and right and check if the subtrees of both are balanced
+- find if whole tree is balanced
+```
+if root == None:
+	return -1
+lHeight = isBalanced(self, root.left) + 1
+rHeight = isBalanced(self, root.right) + 1
+return (abs(lHeight - rHeight) < 2)
+```
+- need to do this for each subtree
+	- This approach if checking for each node would be O(n^2)
+- Instead, ask this question starting from bottom up
+	- using a helper function
+		- if root = None:
+			- we are balanced and have a height of 0
+			- return true, 0
+		- call helper on left and right
+		- we're balanced at this node if the diff of heights of left and right are < 2 AND both our left and right subtrees are balanced
+		- and our height is the max height of our left/ right subtrees + 1
+		- then return a tuple of both of those values, (balanced, height)
+	- call helper on our root, and check if it returns balanced
+```
+class Solution(object):
+    def isBalanced(self, root):
+		def dfs(root):
+			# return bool and height of tree
+			if not root:
+				return [True, 0]
+			# find height and balance of left + right subtrees
+			left, right = dfs(root.left), dfs(root.right)
+			# check if root is balanced, and left + right subtrees
+			balanced = (abs(left[1] - right[1]) < 2) and left[0] and right[0]
+			height = 1 + max(left[1], right[1])
+			
+			return [balanced, height]
+	        
+	return dfs(root)[0]
+```
+- Final code is O(n) runtime with space complexity of O(n) for stacks
+
+## Maximum Depth of Binary Tree
+https://leetcode.com/problems/maximum-depth-of-binary-tree/
+- max depth is num of nodes along longest path from root to leaf
+- check each path while keeping running max? - iterative
+	- traversals of trees
+		- preorder
+		- postorder
+		- inorder
+		- bfs
+- go to simplest case/ simplest tree
+	- check which child has bigger depth
+		- return bigger depth
+- recursively, similar to finding height for tree
+- base case:
+	- if root is none:
+		- return 0
+- recursive calls:
+	- leftDepth = function(root.left) + 1
+	- rightDepth = function(root.right) + 1
+- case 1:
+	- if leftDepth > rightDepth
+		- return leftDepth
+- case 2
+	- return rightDepth
+```
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if root == None:
+            return 0
+            
+        leftDepth = self.maxDepth(root.left) + 1
+        rightDepth = self.maxDepth(root.right) + 1
+        
+        if leftDepth > rightDepth:
+            return leftDepth
+
+        return rightDepth
+```
+Runtime: 
+	n  = num of nodes 
+	O(n)
+Space Complexity:
+	O(n)
+
+## Diameter of Binary Tree
+https://leetcode.com/problems/diameter-of-binary-tree/
+Given the root of a binary tree, return the length of the DIAMETER of the tree
+- what is the diameter?
+	- the length of the longest path btwn any 2 nodes in a tree - can pass through the root
+	- length of a path btwn 2 nodes = num of edges btwn them
+		- ie node1 is the root, node2 is left child of the root, then length of path btwn the two is 1 for 1 edge
+- Thought1:
+	- left most child to right most child is longest path?
+		- verify on examples:
+			- nope, not always the case..
+- Thought2:
+	- longest path goes from 2 nodes with largest max depth from last common node (perhaps not root)
+	- Is it always including leaf node which has largest max depth?
+		- yes
+	- Thought3:
+		- find node with largest max depth first
+		- check from each node up from it, 
+			- NOO
+- Brute Force: O(n^2)
+	- take every node, use it as "top most node"/common/conjoining node in diameter
+		- go as far down right as possible
+			- (find lowest node on right side)
+		- go as far down left as possible/ find lowest node on left side
+- If left path is shorter than child's left path, we arent the top most node
+- Thought4: 
+	- Think of it in subproblems, find max diameter of subtree
+	- START from bottom
+		- find diameter and height of each node
+		- diameter = leftheight + rightheight + 2 (for 2 added edges)
+		- height of null node = -1 
+		- height of node with no children = 0
+		- height = 1 + max(leftHeight, rightHeight)
+```
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def diameterOfBinaryTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        maxDiam = [0]
+        def dfs(root):
+            if root == None:
+                return -1
+            leftH = dfs(root.left)
+            rightH = dfs(root.right)
+            maxDiam[0] = max((leftH + rightH + 2), maxDiam[0])
+            return 1 + max(leftH, rightH)
+        dfs(root)
+        return maxDiam[0]
+```
+Runtime & Space Complexity: O(n)
+
+  *Need to Revisit*
+  
