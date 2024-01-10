@@ -1,60 +1,6 @@
 #binarytree 
-## Intro
-#### What is a binary tree?
-	- trees where each element/ node has at most 2 children
-	- composed of nodes 
-		- usually hold following props:
-			- data element (usually an int but can be anything)
-			- left pointer 
-			- right pointer
-```python
-class TreeNode():
-	def __init__(self, data=None, left=None, right=None):
-		self.data = data
-		self.left = left
-		self.right = right
-```
 
-- common prob: search for smthn in given list
-- ex:
-	- given nums of lottery draw, (1, 2, 5, 10, 16, 20, 23, 36, 40, 41, 45), is number 18 a winning number?
-	- if didn't know nums was sorted, would have to look through each num
-	- 
-	- if we know nums is sorted, stop once we reach number bgger than one we're looking for
-		- how to be efficient abt this?
-			- start in middle of list
-			- move left or right depending on if num looking for is smaller or bigger than one we're currently comparing to
-			- ex: (1, 2, 5, 10, 16, 20, 23, 36, 40, 41, 45), looking for number 18
-				- 20 is middle of list
-				- compare 18 and 20
-				- 18 < 20 so compare 18 and 5 -- since 5 is middle of list (1, 2, 5, 10, 16)
-				- 18> 5 so move to right side of remaining list, (10,16)
-				- continue until no more nums to compare to
-		- Efficient version is often put in the form of BSTs, Binary Search Trees
-#### BST or Binary Search Tree
-- for each node, all nodes to the left are less than or equal to it, and all nodes to the right are greater than it
-- bc of this prop, lookups take O(log n) time on avg, if tree is well balanced
-
-
-## Pros and Cons
-- BSTs are best options when tyring to optimize for efficient searching and flexible updates.
-	- unsorted linked lists have O(1) insertion and deletion ops but require O(n) for search ops
-	- if an array is sorted, search can be O(logn) but updating array by adding/deleting els can be O(N) in worst cases
-- BSTs have more overhead and complexity to initialize and maintain
-	- arrays and linked lists are more straight forward due to 1D structure
-	- trees require more thought due to multidimensional structure
-## Time and Space Complexity
-- Best cases: Accessing/Searching: O(logN), Inserting: O(logN), Deleting: O(logN)
-- Worst cases: Accessing/Searching: O(n), Inserting: O(n), Deleting: O(n)
-- best/ worst cases differ by how well the tree is balanced. Balanced trees are more efficient than unbalanced trees
-	- ![[Pasted image 20230525110224.png]]
-## Terms
-- Leaf - node with no left or right children
-- Full Binary Tree - every node has either 0 or 2 children
-- Balanced binary tree - the depth diff btwn 2 leaves is at most 1
-- Order of node or tree - the number of children it has
-- Height of a node - num of edges on the longest path from the ndoe to a leaf
-## Traversing binary trees
+###### Traversing binary trees
 - 4 main methods: preorder, postorder, inorder, or level order (bfs/ breadth first search)
 	- most tree probs can be solved using one of these methods, just have to figure out which traversal to use
 - Tree for example:
@@ -71,7 +17,7 @@ def printPreorder(node:TreeNode):
 	printPreorder(node.right)
 # ex tree traversal would be 1, 2, 4, 5, 3
 ```
-#### Postorder
+Postorder
 ```python
 # left -> right -> root
 # good for exploring leaves b4 roots
@@ -83,7 +29,7 @@ def printPostorder(node:TreeNode):
 	print(node.data)
 # ex tree traversal would be 4, 5, 2, 3, 1
 ```
-#### Inorder
+Inorder
 ```python
 # left -> root -> right
 # good for converting BST into an array
@@ -95,7 +41,7 @@ def printInorder(node:TreeNode):
 	printInorder(node.right)
 #ex tree traversal would be 4, 2, 5, 1, 3
 ```
-#### BFS/ Level Order 
+BFS/Level Order
 ```python
 from collections import deque
 def printBFS(root:TreeNode):
@@ -111,7 +57,7 @@ def printBFS(root:TreeNode):
 # ex tree traversal would be 1, 2, 3, 4, 5
 ```
 
-## Common Operations
+###### Common Operations
 #### Searching in a BST
 ```python
 def doesNodeExistInBST(bstRoot:TreeNode, searchValue:int):
@@ -128,7 +74,7 @@ def doesNodeExistInBST(bstRoot:TreeNode, searchValue:int):
 		# if the node we're at is bigger than what we're looking for, traverse left
 			doesNodeExist(bstRoot.left, searchValue)
 ```
-#### Height of BST
+###### Height of BST
 ```python
 # height is length of path from root to deepest node in the tree
 def getBinaryTreeHeight(node:TreeNode):
@@ -148,7 +94,7 @@ pseudocode:
 - return taller kid's height + 1 to count this node's height
 """
 ```
-#### Depth of BST
+###### Depth of BST
 - what's the diff btwn depth and height of a bst?
 	- depth of a node:
 		- number of edges from node to tree's root node
@@ -162,8 +108,8 @@ pseudocode:
 	- height of tree:
 		- number of edges on Longest path from root to leaf
 
-## Patterns
-#### Binary Trees Iterative Traversal Approach
+##### Patterns
+###### Binary Trees Iterative Traversal Approach
 - Why?
 	- usually recursive traversal is first approach but this can lead to big memory footprints
 	- might be asked for iterative traversal bc of this
