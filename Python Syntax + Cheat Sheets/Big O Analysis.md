@@ -7,21 +7,41 @@
 	- what is N?
 ## Diff runtimes
 - constant O(1)
+	- hashmap lookup
+	- array access and update
+	- pushing and popping elements from a sttack
 	- Runtime does not scale with input
 	- ![[Pasted image 20230524094039.png]]
 - Logarithmic O(logn)
+	- binary search
+	- balanced bst lookup
+	- processing digits of number
 	- numbers in problem space get divided by some factor each time
 	- ![[Pasted image 20230524094055.png]]
 - Linear O(n)
+	- going through array/linked list
+	- two pointers
+	- tree/graph traversal
+	- stack/queue
 	- Grows proportionally with the size of the input
 	- ![[Pasted image 20230524094202.png]]
+- O(K log(n))
+	- heap push/pop k times
+		- top k elements (push and pop to heap k times)
+	- binary search, k times
+- O(n log(n))
+	- sorting - default sorting algo's expected runtime in mainstream languages
+	- divide and conquer w linear time merge operation
 - Quadratic O(n^2)
 	- common for double for loops
 	- Note: the series 1 + 2 + 3 + ... + n is also O(n^2)
 	- ![[Pasted image 20230524094255.png]]
 - Exponential: O(2^n)
+	- combinatorial problems, backtracking
 	- Can occur w recursive solutions
 	- ![[Pasted image 20230524094332.png]]
+- O(n!)
+	- backtracking
 ## Rules for Big O Analysis
 - diff steps get added together
 	- drop non dominant terms O(N^2 + N) = O(N^2)

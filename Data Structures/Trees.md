@@ -1,11 +1,37 @@
-#binarytree 
+- undirected graphs w no cycles!!
+	- connected grph w N nodes and N - 1 edges
+```python
+class TreeNode():
+	def __init__(self, data=None, left=None, right=None):
+		self.data = data
+		self.left = left
+		self.right = right
+```
+## Binary Search Trees
 
-###### Traversing binary trees
+- for each node, all nodes to the left are less than or equal to it, and all nodes to the right are greater than it
+- bc of this prop, lookups take O(log n) time on avg, if tree is well balanced
+#### Pros/Cons
+- Pros:
+	- efficient search
+		- unsorted LL O(1) insertion & deletion but O(n) search
+		- sorted array search -> O(logN) but update can be O(n) in worst cases
+	- flexible updates
+- Cons
+	- more overhead & complexity
+#### Time & Space complexity
+- Best cases: Accessing/Searching: O(logN), Inserting: O(logN), Deleting: O(logN)
+- Worst cases: Accessing/Searching: O(n), Inserting: O(n), Deleting: O(n)
+- best/ worst cases differ by how well the tree is balanced. Balanced trees are more efficient than unbalanced trees
+	- ![[Pasted image 20230525110224.png]]
+Terms:
+	
+#### Traversing binary trees
 - 4 main methods: preorder, postorder, inorder, or level order (bfs/ breadth first search)
 	- most tree probs can be solved using one of these methods, just have to figure out which traversal to use
 - Tree for example:
 	- ![[Pasted image 20230525112252.png]]
-#### Preorder
+##### Preorder
 ```python
 # root -> left -> right
 # good for exploring roots b4 leaves, ex: copying a tree
@@ -17,7 +43,7 @@ def printPreorder(node:TreeNode):
 	printPreorder(node.right)
 # ex tree traversal would be 1, 2, 4, 5, 3
 ```
-Postorder
+##### Postorder
 ```python
 # left -> right -> root
 # good for exploring leaves b4 roots
@@ -29,7 +55,7 @@ def printPostorder(node:TreeNode):
 	print(node.data)
 # ex tree traversal would be 4, 5, 2, 3, 1
 ```
-Inorder
+##### Inorder
 ```python
 # left -> root -> right
 # good for converting BST into an array
@@ -41,7 +67,7 @@ def printInorder(node:TreeNode):
 	printInorder(node.right)
 #ex tree traversal would be 4, 2, 5, 1, 3
 ```
-BFS/Level Order
+##### BFS/Level Order
 ```python
 from collections import deque
 def printBFS(root:TreeNode):
@@ -57,8 +83,8 @@ def printBFS(root:TreeNode):
 # ex tree traversal would be 1, 2, 3, 4, 5
 ```
 
-###### Common Operations
-#### Searching in a BST
+#### Common Operations
+##### Searching in a BST
 ```python
 def doesNodeExistInBST(bstRoot:TreeNode, searchValue:int):
 	# if we've ran out of values to search through, return false
@@ -160,14 +186,14 @@ def preorderTraversal(root:TreeNode):
 	- we push/pop each node of tree
 - Space Complexity: O(h), h is height of the tree
 
-##### Approach Key Points
+###### Approach Key Points
 1. recall recursive way to solve problem
 2. working from recursive solution, we know our desired output
 3. using desired output try to create new approach which would give us same outcome
 4. once we saw a pattern, able to come up with an algorithm
 
 
-#### Finding 2nd Largest Node in a BST
+##### Finding 2nd Largest Node in a BST
 ```python
 class TreeNode():
 	def __init__(self, data=None, left=None, right=None):
@@ -190,7 +216,7 @@ def printInorder(node:TreeNode):
 - runtime: O(n) - have to look at each node
 - space: O(n)
 
-##### Method 2
+###### Method 2
 - use main props of BST, 1) all els to the right are greater 2) all els to left are smaller
 - rightmost element of a tree is the largest element
 - how to find largest:

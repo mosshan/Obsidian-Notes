@@ -1,0 +1,7 @@
+- also known as prefix tree
+- search tree
+	- keys are usually strings w links between nodes being characters
+	- ![[Pasted image 20240112104623.png]]
+- Accessing a key:
+	- DFS
+	- Searched in O(M) where M is max string length
