@@ -9,11 +9,18 @@
 			- items stored next to eachother in mem so if gets too big, must find new block
 		- if we want to insert/delete near beginning (all must move) -- not rly stack use tho
 - Operations
-	- use append to append at end of list
-	- use pop to pop from end
-		- pop gives index error if popping from empty list
+	-  append
+		- add element to the stack
+	- pop
+		- remove element from stack 
+		- gives index error if list is empty
+	- peek 
+		- list\[-1]
+	- isEmpty
+		- self.stack == \[]
+		- compare stack to empty list
 - Time Complexity
-	- ![[Pasted image 20240109113437.png]]
+	- ![[Pasted image 20240115153931.png]]
 	
 
 ```python

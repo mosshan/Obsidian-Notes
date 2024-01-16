@@ -19,7 +19,7 @@ dict.keys() # returns list of keys of dictionary
 dict.values() # returns list of values of dictionary
 dict.get('a') # returns values for any corresponding key
 # or
-dict['a'} # but this option can give indexerrors
+dict['a'] # but this option can give indexerrors
 dict.items() # returns [('a',1),('b',2),('c',3)]
 # NOTE : items() Returns view object that will be updated with any future changes to dict
 dict.copy() # returns copy of the dictionary

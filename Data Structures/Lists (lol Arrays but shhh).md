@@ -26,8 +26,13 @@
 		- ** if need to add/remove at both ends -> collections.deque
 
 #### Things to look out for in interviews
-- dup vals in array
-- slicing and concat arrays -> O(n) time!!
+1. Validating Assumptions
+	1. Duplicates?
+	2. Sorted/unsorted
+2. Boundary Condits
+	2. Negative Index to access from end of array
+3. Efficiency
+	1. Slicing and concat take O(n) time!!
 
 #### Techniques
 - sliding window
