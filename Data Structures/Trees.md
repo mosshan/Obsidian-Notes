@@ -1,5 +1,22 @@
 - undirected graphs w no cycles!!
 	- connected grph w N nodes and N - 1 edges
+### Terms
+- depth = max level of any node in a tree
+	- depth of specific node:
+		- num of edges from root node to that node
+- height = num of edges on longest path from root to leaf
+	- depth of tree from root
+- Full tree/ proper binary tree:
+	- every node has 0 or 2 children
+- complete tree
+	- binary tree where every level is filled except for maybe last
+	- last is filled from left to right
+	- heap uses complete binary trees
+- balanced tree
+	- binary tree where diff btwn left and right subtrees isnt more than 1
+	- maintains optimal search and insertion time
+- multiway tree
+	- tree where nodes can have more than 2 kids
 ```python
 class TreeNode():
 	def __init__(self, data=None, left=None, right=None):
@@ -9,23 +26,26 @@ class TreeNode():
 ```
 ## Binary Search Trees
 
+- binary tree-> each node has as most 2 kids
 - for each node, all nodes to the left are less than or equal to it, and all nodes to the right are greater than it
 - bc of this prop, lookups take O(log n) time on avg, if tree is well balanced
 #### Pros/Cons
 - Pros:
-	- efficient search
+	- efficient search -> o(logn) on avg
 		- unsorted LL O(1) insertion & deletion but O(n) search
 		- sorted array search -> O(logN) but update can be O(n) in worst cases
 	- flexible updates
+	- ordered data storage
+	- 
 - Cons
 	- more overhead & complexity
 #### Time & Space complexity
 - Best cases: Accessing/Searching: O(logN), Inserting: O(logN), Deleting: O(logN)
 - Worst cases: Accessing/Searching: O(n), Inserting: O(n), Deleting: O(n)
 - best/ worst cases differ by how well the tree is balanced. Balanced trees are more efficient than unbalanced trees
-	- ![[Pasted image 20230525110224.png]]
-Terms:
+- Space: O(n)
 	
+
 #### Traversing binary trees
 - 4 main methods: preorder, postorder, inorder, or level order (bfs/ breadth first search)
 	- most tree probs can be solved using one of these methods, just have to figure out which traversal to use
@@ -84,6 +104,64 @@ def printBFS(root:TreeNode):
 ```
 
 #### Common Operations
+##### Insertion
+``` python
+def insert(self, val):
+	newnode = Node(val):
+	if self.root is None:
+		self.root = newnode
+	else:
+		curr = self.root
+		parent = None
+		while curr is not None:
+			parent = curr:
+			if val < curr.data:
+				curr = curr.left
+			else:
+				curr = curr.right
+		if value < parent.data:
+			parent.left = newnode
+		else:
+			parent.right = newnode
+```
+##### Deletion
+``` python
+def findMin(node):
+	node = node.right
+	while(node != None and node.left != None):
+		node = node.left
+	return node
+	
+def deleteNode(root, val):
+	#Base cAse
+	if root is None:
+		return root
+	# node to be deleted in left subtree
+	if root.val > val:
+		root.left = deleteNode(root.left, val)
+	# node to be deleted in right subtree
+	elif root.right < val:
+		root.right = deleteNode(root.right, val)
+	else:
+	#we have found node to be deleted
+		#case 1, no children
+		if root.left == None and root.right == None:
+			return None
+		#case 2 only 1 child
+		if root.left == None:
+			return root.right
+		if root.right == None:
+			return root.left
+		# case 2, 2 kids
+		else: # replace self with inorder successor, which will be the minimum node in our right subtree -> node with smallest value greater than current node 
+			#find inorder successor of child
+			successor = findMin(root)
+			# copy inorder successor data to node
+			root.val = successor.val
+			# delete inorder successor
+			root.right = deleteNode(root.right, successor)
+	 return root
+```
 ##### Searching in a BST
 ```python
 def doesNodeExistInBST(bstRoot:TreeNode, searchValue:int):

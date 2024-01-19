@@ -36,8 +36,8 @@ head.next = ListNode(2)
  - Worst Case: occurs when operating at the end of the list
 	 - N is num of elements in list
 	 -  Accessing/Seaching: O(N)
-	 - Inserting: O(N)
-	 - Deleting: O(N)
+	 - Inserting at end/at given node: O(N)
+	 - Deleting from end/ a given node: O(N)
 
 ##### Common Operations
 ##### Insert
